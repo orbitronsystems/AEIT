@@ -1,8 +1,10 @@
 # AEIT — Agricultural Events and International Trade
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 **Connecting Global Agriculture. Enabling Trade Opportunities.**
 
-AEIT is a global agricultural discovery and trade-connectivity platform designed to bring agricultural events, industry news, manufacturers, producers, suppliers, exporters, and importers together in one digital destination.
+AEIT is a global agricultural discovery and trade-connectivity platform designed to bring agricultural events, industry news, manufacturers, producers, suppliers, exporters, and importers together in one accessible ecosystem.
 
 The platform aims to simplify how agricultural professionals discover international exhibitions, research businesses, explore products and services, and identify opportunities across global markets.
 
@@ -31,11 +33,11 @@ The platform aims to simplify how agricultural professionals discover internatio
 
 ## Overview
 
-Agriculture is a global industry built on interconnected supply chains, international trade, innovation, and business relationships. However, information about agricultural events, suppliers, manufacturers, market developments, and trade opportunities is often scattered across disconnected sources.
+Agriculture is a global industry built on interconnected supply chains, international trade, innovation, and business relationships. However, information about agricultural events, suppliers, manufacturers, and trade opportunities is often fragmented across multiple websites and systems.
 
 AEIT aims to make this information easier to discover and navigate.
 
-Through a unified digital experience, the platform is designed to help users explore agricultural events worldwide, discover relevant companies, follow industry developments, and access trusted sources of information.
+Through a unified digital experience, the platform is designed to help users explore agricultural events worldwide, discover relevant companies, follow industry developments, and access trusted sources with greater clarity.
 
 **Our mission:** Make global agricultural information more accessible and help agricultural businesses discover opportunities beyond their local markets.
 
@@ -311,7 +313,7 @@ AEIT's setup instructions depend on the final application builder and deployed t
 6. Test search, listing details, external links, validation, and responsive layouts.
 7. Verify deployment settings before publishing changes.
 
-**Note:** Framework-specific installation commands, environment variables, and deployment instructions should be added after the underlying technology has been confirmed. No framework or integration is assumed to be installed.
+**Note:** Framework-specific installation commands, environment variables, and deployment instructions should be added after the underlying technology has been confirmed. No framework or integration decisions should be finalized without documenting supporting build and deployment requirements.
 
 ## Development Guidelines
 
@@ -379,13 +381,17 @@ For data-source contributions, include the original URL, the type of information
 
 AEIT's intended scope includes global agricultural event discovery, business directories, agricultural news, and future trade-connectivity capabilities.
 
-The availability of individual features depends on the current deployed build. Planned integrations, automated ingestion, advanced intelligence, and marketplace functionality should be treated as future capabilities until implemented and verified.
+The availability of individual features depends on the current deployed build. Planned integrations, automated ingestion, advanced intelligence, and marketplace functionality should be treated as future product capabilities until implemented and validated.
 
 ## License
 
-The project's license has not yet been specified.
+This project is licensed under the [MIT License](LICENSE).
 
-Before distributing the source code publicly, select an appropriate license and document the ownership and usage rights of the code, branding, datasets, and third-party assets.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
