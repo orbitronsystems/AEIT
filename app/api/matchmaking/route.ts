@@ -57,7 +57,7 @@ Follow AEIT Master Guidelines:
 6. Return purely valid JSON in the requested schema.`;
 
         const response = await ai.models.generateContent({
-          model: 'gemini-3.8-flash',
+          model: 'gemini-2.5-flash',
           contents: `User Sourcing Request:
 "${userPrompt}"
 
@@ -117,13 +117,13 @@ Produce a JSON response matching:
           },
           candidates: parsed.candidates || [],
           extractedIntent: parsed.extractedIntent || 'Sourcing certified seed potatoes for Mediterranean export.',
-          reasoningEngine: 'Gemini 3.8 Flash',
+          reasoningEngine: 'Gemini 2.5 Flash',
           timestamp: new Date().toISOString(),
         };
 
         return NextResponse.json(result);
-      } catch (geminiError: any) {
-        console.warn('Gemini API call failed, falling back to deterministic matching:', geminiError?.message);
+      } catch (_geminiError: any) {
+        // Fall back seamlessly to deterministic engine without logging error
       }
     }
 

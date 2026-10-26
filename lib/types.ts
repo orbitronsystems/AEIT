@@ -111,7 +111,7 @@ export interface MatchResult {
   query: SourcingQuery;
   candidates: MatchCandidate[];
   extractedIntent: string;
-  reasoningEngine: 'Gemini 3.8 Flash' | 'Deterministic Fallback Engine';
+  reasoningEngine: 'Gemini 2.5 Flash' | 'Gemini 3.8 Flash' | 'Deterministic Fallback Engine';
   timestamp: string;
 }
 

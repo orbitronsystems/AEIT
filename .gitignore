@@ -6,3 +6,6 @@ coverage/
 .env*
 !.env.example
 /devpost/learner-profile.md
+.claude/
+.agents/
+agent/

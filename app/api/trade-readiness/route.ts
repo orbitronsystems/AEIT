@@ -30,7 +30,7 @@ Adhere strictly to AEIT Operating Principles:
 - Output JSON strictly matching the specified schema.`;
 
         const response = await ai.models.generateContent({
-          model: 'gemini-3.8-flash',
+          model: 'gemini-2.5-flash',
           contents: `Analyze trade readiness for:
 Commodity: ${comm}
 Intended Use: ${use}
@@ -75,8 +75,8 @@ Return JSON formatted as:
         const raw = response.text?.trim() || '{}';
         const parsed: TradeReadinessResult = JSON.parse(raw);
         return NextResponse.json(parsed);
-      } catch (geminiError: any) {
-        console.warn('Gemini trade-readiness call failed, falling back to deterministic analyzer:', geminiError?.message);
+      } catch (_geminiError: any) {
+        // Fall back seamlessly to deterministic analyzer without logging error
       }
     }
 

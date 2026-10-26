@@ -1,1 +1,83 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .bg-wood-dark {
+    background-color: #14100c;
+  }
+  .bg-wood-warm {
+    background-color: #241d16;
+  }
+  .bg-wood-card {
+    background-color: #ffffff;
+  }
+  .bg-cream-surface {
+    background-color: #fbf9f5;
+  }
+  .border-wood-light {
+    border-color: #e2d9cd;
+  }
+  .border-wood-dark {
+    border-color: #382c20;
+  }
+  .text-wood-heading {
+    color: #14100c;
+  }
+  .text-wood-subtle {
+    color: #5c5246;
+  }
+  .bg-sage-light {
+    background-color: #f0f7f2;
+  }
+  .text-sage-dark {
+    color: #14532d;
+  }
+  .border-sage {
+    border-color: #bbf7d0;
+  }
+
+  /* Luxury Champagne Gold & Executive Finishes */
+  .bg-luxury-obsidian {
+    background: linear-gradient(135deg, #120f0c 0%, #1e1712 50%, #17120d 100%);
+  }
+  .border-gold-accent {
+    border-color: rgba(212, 175, 55, 0.25);
+  }
+  .border-gold-light {
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+  .text-gold-accent {
+    color: #d4af37;
+  }
+  .text-gold-light {
+    color: #f3e6c4;
+  }
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #f6eedb 0%, #d4af37 60%, #b89230 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .gold-pill {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.04) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #e5c77e;
+  }
+  .luxury-card-shadow {
+    box-shadow: 0 4px 20px -2px rgba(20, 16, 12, 0.05), 0 2px 6px -1px rgba(20, 16, 12, 0.03);
+  }
+}
+
+/* Custom sleek scrollbar for luxury theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #fbf9f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0f5a28;
+}

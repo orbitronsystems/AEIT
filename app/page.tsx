@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header, { NavTab } from '@/components/Header';
 import DiscoverView from '@/components/DiscoverView';
 import EventsView from '@/components/EventsView';
@@ -96,11 +96,9 @@ export default function Home() {
     }
   };
 
-  // Business save handler
   const handleSaveBusiness = (biz: AgriBusiness) => {
     const existing = workspaceLeads.find((l) => l.id === `biz-${biz.id}`);
     if (existing) {
-      // Toggle remove
       saveWorkspaceLeads(workspaceLeads.filter((l) => l.id !== `biz-${biz.id}`));
       return;
     }
@@ -122,7 +120,6 @@ export default function Home() {
     saveWorkspaceLeads([newLead, ...workspaceLeads]);
   };
 
-  // Event save handler
   const handleSaveEvent = (evt: AgriEvent) => {
     const existing = workspaceLeads.find((l) => l.id === `evt-${evt.id}`);
     if (existing) {
@@ -146,7 +143,6 @@ export default function Home() {
     saveWorkspaceLeads([newLead, ...workspaceLeads]);
   };
 
-  // AI Matchmaker candidate save handler
   const handleSaveLeadFromMatch = (cand: MatchCandidate, queryContext: string) => {
     const newLead: WorkspaceLead = {
       id: `match-${cand.businessId}-${Date.now()}`,
@@ -166,7 +162,6 @@ export default function Home() {
     saveWorkspaceLeads([newLead, ...workspaceLeads]);
   };
 
-  // Trade Desk corridor save handler
   const handleSaveCorridor = (res: TradeReadinessResult) => {
     const newLead: WorkspaceLead = {
       id: `corridor-${Date.now()}`,
@@ -186,7 +181,6 @@ export default function Home() {
     saveWorkspaceLeads([newLead, ...workspaceLeads]);
   };
 
-  // Lead updates
   const handleUpdateLeadStage = (id: string, stage: WorkspaceLead['stage']) => {
     saveWorkspaceLeads(
       workspaceLeads.map((l) => (l.id === id ? { ...l, stage } : l))
@@ -207,7 +201,6 @@ export default function Home() {
     saveWorkspaceLeads([lead, ...workspaceLeads]);
   };
 
-  // Navigations with query context
   const handleLaunchMatchmakingWithPrompt = (p: string) => {
     setMatchmakingPrompt(p);
     setCurrentTab('matchmaking');
@@ -235,7 +228,7 @@ export default function Home() {
     workspaceLeads.some((l) => l.id === `evt-${id}` || l.details?.eventId === id);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#fbf9f5] text-[#14100c] font-sans">
       {/* Top Header */}
       <Header
         currentTab={currentTab}
@@ -247,19 +240,15 @@ export default function Home() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16">
+      <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pb-16 pt-3">
         {currentTab === 'discover' && (
           <DiscoverView
             businesses={SEED_BUSINESSES}
             events={SEED_EVENTS}
             onNavigate={setCurrentTab}
             onLaunchMatchmaking={handleLaunchMatchmakingWithPrompt}
-            onSelectBusiness={(biz) => {
-              setCurrentTab('businesses');
-            }}
-            onSelectEvent={(evt) => {
-              setCurrentTab('events');
-            }}
+            onSelectBusiness={() => setCurrentTab('businesses')}
+            onSelectEvent={() => setCurrentTab('events')}
           />
         )}
 
@@ -319,23 +308,24 @@ export default function Home() {
         onLaunchMatchmaking={handleLaunchMatchmakingWithPrompt}
       />
 
-      {/* Global Footer */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 px-4 py-8 text-xs text-slate-500">
+      {/* Global Institutional Wood, Gold & Ivory Footer */}
+      <footer className="border-t border-[#382c20] bg-[#120f0c] px-4 py-8 text-xs text-[#d6cbba]">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <p className="font-semibold text-slate-400">
-              AEIT — Global Agricultural Trade Intelligence, Events & Business Connectivity
+            <p className="font-bold text-white tracking-wide flex items-center justify-center sm:justify-start gap-2">
+              <span className="gold-gradient-text text-sm font-black">AEIT</span>
+              <span>— Global Agricultural Trade Intelligence, Events & Business Connectivity</span>
             </p>
-            <p className="text-[11px] text-slate-600">
-              Operating under the AEIT Master Standard: Evidence before assertions. Trust is multi-dimensional. No unverified trade assurances.
+            <p className="text-[11px] text-[#a89b88]">
+              Operating under the AEIT Master Standard: Evidence before assertions · Multi-dimensional trust verification · Zero fabricated claims.
             </p>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
-            <span>Server Gemini 3.8 Flash Active</span>
-            <span>•</span>
-            <span>NAK & SASA Verified</span>
-            <span>•</span>
-            <span>CAPQ Registry Linked</span>
+          <div className="flex items-center gap-3 text-[#e2d9cc] font-mono text-[11px]">
+            <span className="text-[#86efac] font-semibold">Gemini 2.5 Flash Active</span>
+            <span>·</span>
+            <span className="text-[#e5c77e]">NAK & SASA Verified</span>
+            <span>·</span>
+            <span className="text-[#e5c77e]">CAPQ Registry Linked</span>
           </div>
         </div>
       </footer>

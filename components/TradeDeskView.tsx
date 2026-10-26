@@ -1,14 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Ship,
-  Search,
   CheckCircle2,
   AlertTriangle,
   FileCheck,
   ShieldAlert,
-  ArrowRight,
   ExternalLink,
   HelpCircle,
   Bookmark,
@@ -16,9 +14,9 @@ import {
   Building,
   RefreshCw,
   Scale,
-  Sparkles,
 } from 'lucide-react';
 import { TradeReadinessResult } from '@/lib/types';
+import TradeVolumeChart from './TradeVolumeChart';
 
 interface TradeDeskViewProps {
   initialCommodity?: string;
@@ -72,8 +70,7 @@ export default function TradeDeskView({
     }
   };
 
-  // Run initial analysis on mount
-  React.useEffect(() => {
+  useEffect(() => {
     let ignore = false;
     const fetchInitial = async () => {
       setLoading(true);
@@ -118,88 +115,97 @@ export default function TradeDeskView({
   };
 
   return (
-    <div className="space-y-8 py-4">
-      {/* Banner */}
-      <div className="rounded-xl border border-slate-800 bg-gradient-to-r from-slate-900 to-slate-950 p-6 space-y-3">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-400">
+    <div className="space-y-6 py-2 font-sans text-[#14100c]">
+      {/* Enterprise Header Banner */}
+      <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 sm:p-8 luxury-card-shadow space-y-3">
+        <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#0f5a28]">
           <Ship className="h-4 w-4" />
-          <span>ARM C & Phase 7 — Cross-Border Trade-Readiness Desk</span>
+          <span>ARM C — Cross-Border Agricultural Trade & Biosecurity Intelligence</span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
-          Bilateral Agricultural Trade & Regulatory Desk
+        <h1 className="text-xl sm:text-2xl font-black text-[#14100c] tracking-tight">
+          Agricultural Trade Readiness & Regulatory Desk
         </h1>
-        <p className="text-sm text-slate-300 max-w-3xl leading-relaxed">
-          Agricultural trade is heavily regulated. A product’s commercial availability does not guarantee legal entry. This engine identifies competent biosecurity authorities, phytosanitary quarantine restrictions, advance cargo declarations, and document requirements.
+        <p className="text-xs text-[#5c5246] max-w-3xl leading-relaxed">
+          Agricultural trade is governed by sanitary and phytosanitary (SPS) protocols, import quotas, and biosecurity clearances. Commercial availability does not establish legal import eligibility. AEIT verifies national competent authorities, mandatory quarantine screenings, pre-shipment cold-treatment, and documentation requirements.
         </p>
       </div>
 
       {/* Corridor Configurator */}
-      <div className="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 space-y-4 shadow-xl">
-        <h3 className="text-sm font-bold text-white flex items-center gap-2">
-          <Scale className="h-4 w-4 text-emerald-400" />
-          <span>Configure Bilateral Agricultural Corridor</span>
-        </h3>
+      <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-4">
+        <div className="flex items-center justify-between border-b border-[#f0ece1] pb-3">
+          <div className="flex items-center gap-2">
+            <Scale className="h-4 w-4 text-[#0f5a28]" />
+            <h3 className="text-xs font-mono font-bold text-[#14100c] tracking-wide uppercase">
+              Bilateral Corridor Parameters
+            </h3>
+          </div>
+          <span className="text-[11px] font-mono text-[#78716c] font-semibold">
+            AEIT Biosecurity Engine v4.2
+          </span>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
           <div>
-            <label className="block text-slate-400 font-medium mb-1">Commodity / Crop</label>
+            <label className="block text-[#5c5246] font-bold mb-1">
+              Commodity / Botanical Variety
+            </label>
             <input
               type="text"
               value={commodity}
               onChange={(e) => setCommodity(e.target.value)}
-              placeholder="e.g. Seed Potatoes, Fresh Citrus..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-500"
+              placeholder="e.g. Seed Potatoes (Solanum tuberosum)"
+              className="w-full rounded-2xl border border-[#e2d9cd] bg-[#fbf9f5] px-3.5 py-2.5 text-[#14100c] outline-none focus:border-[#d4af37] font-mono text-xs luxury-card-shadow"
             />
           </div>
 
           <div>
-            <label className="block text-slate-400 font-medium mb-1">Origin Country</label>
+            <label className="block text-[#5c5246] font-bold mb-1">Origin Country / Port</label>
             <input
               type="text"
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
               placeholder="e.g. Netherlands, Scotland, South Africa..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-500"
+              className="w-full rounded-2xl border border-[#e2d9cd] bg-[#fbf9f5] px-3.5 py-2.5 text-[#14100c] outline-none focus:border-[#d4af37] font-mono text-xs luxury-card-shadow"
             />
           </div>
 
           <div>
-            <label className="block text-slate-400 font-medium mb-1">Destination Country</label>
+            <label className="block text-[#5c5246] font-bold mb-1">Destination Country / Port</label>
             <input
               type="text"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
               placeholder="e.g. Egypt, UAE, Netherlands..."
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-500"
+              className="w-full rounded-2xl border border-[#e2d9cd] bg-[#fbf9f5] px-3.5 py-2.5 text-[#14100c] outline-none focus:border-[#d4af37] font-mono text-xs luxury-card-shadow"
             />
           </div>
 
           <div>
-            <label className="block text-slate-400 font-medium mb-1">Intended Use</label>
+            <label className="block text-[#5c5246] font-bold mb-1">Regulatory Channel / Use</label>
             <select
               value={intendedUse}
               onChange={(e) => setIntendedUse(e.target.value)}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-white outline-none focus:border-emerald-500"
+              className="w-full rounded-2xl border border-[#e2d9cd] bg-[#fbf9f5] px-3 py-2.5 text-[#14100c] outline-none focus:border-[#d4af37] text-xs font-bold luxury-card-shadow cursor-pointer"
             >
-              <option value="Planting / Seed Propagation">Planting / Seed Propagation (Regulated)</option>
+              <option value="Planting / Seed Propagation">Planting / Propagation (Strict SPS)</option>
               <option value="Direct Consumption / Retail">Direct Consumption / Retail</option>
               <option value="Industrial Food Processing">Industrial Food Processing</option>
-              <option value="Machinery & Farm Infrastructure">Machinery & Farm Infrastructure</option>
+              <option value="Machinery & Farm Infrastructure">Machinery & Farm Equipment</option>
             </select>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 border-t border-slate-800">
-          <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
-            <span className="font-semibold text-slate-300">Quick Corridor Presets:</span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-[#f0ece1]">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-mono text-[#78716c] text-[11px] font-bold">Presets:</span>
             <button
               onClick={() => {
-                setCommodity('Seed Potatoes');
+                setCommodity('Seed Potatoes (Solanum tuberosum)');
                 setOrigin('Netherlands');
                 setDestination('Egypt');
                 setIntendedUse('Planting / Seed Propagation');
               }}
-              className="rounded bg-slate-800 px-2 py-0.5 text-slate-300 hover:text-white"
+              className="rounded-xl bg-[#fbf9f5] border border-[#e2d9cd] px-3 py-1 text-xs text-[#5c5246] font-semibold hover:text-[#14100c] hover:bg-[#f0ece1] cursor-pointer"
             >
               Seed Potatoes (NL → EG)
             </button>
@@ -210,25 +216,36 @@ export default function TradeDeskView({
                 setDestination('Netherlands (Rotterdam)');
                 setIntendedUse('Direct Consumption / Retail');
               }}
-              className="rounded bg-slate-800 px-2 py-0.5 text-slate-300 hover:text-white"
+              className="rounded-xl bg-[#fbf9f5] border border-[#e2d9cd] px-3 py-1 text-xs text-[#5c5246] font-semibold hover:text-[#14100c] hover:bg-[#f0ece1] cursor-pointer"
             >
               Citrus (ZA → NL)
+            </button>
+            <button
+              onClick={() => {
+                setCommodity('Automated Drip Irrigation Systems');
+                setOrigin('Israel');
+                setDestination('Egypt (Nile Delta)');
+                setIntendedUse('Machinery & Farm Infrastructure');
+              }}
+              className="rounded-xl bg-[#fbf9f5] border border-[#e2d9cd] px-3 py-1 text-xs text-[#5c5246] font-semibold hover:text-[#14100c] hover:bg-[#f0ece1] cursor-pointer"
+            >
+              Precision Irrigation (IL → EG)
             </button>
           </div>
 
           <button
             onClick={runAnalysis}
             disabled={loading}
-            className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2 text-xs font-semibold text-slate-950 hover:bg-emerald-400 transition-colors"
+            className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#15803d] to-[#0f5a28] hover:from-[#166534] hover:to-[#14532d] px-5 py-2.5 text-xs font-bold text-white transition-colors disabled:opacity-50 whitespace-nowrap cursor-pointer shadow-md"
           >
             {loading ? (
               <>
-                <RefreshCw className="h-4 w-4 animate-spin" />
-                <span>Checking Regulations...</span>
+                <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                <span>Evaluating Biosecurity...</span>
               </>
             ) : (
               <>
-                <FileCheck className="h-4 w-4" />
+                <FileCheck className="h-3.5 w-3.5" />
                 <span>Evaluate Trade Readiness</span>
               </>
             )}
@@ -237,8 +254,8 @@ export default function TradeDeskView({
       </div>
 
       {error && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-xs text-red-300 flex items-center gap-2">
-          <AlertTriangle className="h-4 w-4 text-red-400" />
+        <div className="rounded-2xl border border-[#fca5a5] bg-[#fef2f2] p-4 text-xs text-[#991b1b] flex items-center gap-2 font-bold">
+          <AlertTriangle className="h-4 w-4 text-[#dc2626] shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -246,74 +263,96 @@ export default function TradeDeskView({
       {/* Result Display */}
       {result && (
         <div className="space-y-6">
-          {/* Header Summary */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-            <div>
-              <span className="rounded bg-emerald-500/10 px-2.5 py-0.5 text-xs font-bold text-emerald-400 border border-emerald-500/20">
-                HS Classification: {result.hsCodeEstimated}
-              </span>
-              <h2 className="text-xl font-bold text-white mt-1">
+          {/* Header Summary & Actions */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs font-bold text-[#14532d] bg-[#f0f7f2] border border-[#bbf7d0] px-2.5 py-0.5 rounded-md">
+                  Estimated HS {result.hsCodeEstimated}
+                </span>
+                <span className="text-[11px] font-mono text-[#92400e] bg-[#fef3c7] border border-[#fde68a] px-2.5 py-0.5 rounded-md font-bold">
+                  {result.intendedUse.includes('Planting') ? 'Phytosanitary Quarantine Rigor' : 'Standard Commercial'}
+                </span>
+              </div>
+              <h2 className="text-lg sm:text-xl font-black text-[#14100c] pt-1">
                 {result.commodity} ({result.origin} → {result.destination})
               </h2>
-              <p className="text-xs text-slate-400">
-                Intended Regulatory Channel: <strong className="text-slate-300">{result.intendedUse}</strong>
+              <p className="text-xs text-[#5c5246] font-medium">
+                Channel: <strong className="text-[#14100c]">{result.intendedUse}</strong> · Evaluated under SPS Sanitary & Phytosanitary Protocol
               </p>
             </div>
 
             <button
               onClick={handleSave}
-              className={`flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold transition-all cursor-pointer ${
                 saved
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                  : 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
+                  ? 'bg-[#f0f7f2] text-[#14532d] border border-[#bbf7d0]'
+                  : 'bg-gradient-to-r from-[#15803d] to-[#0f5a28] hover:from-[#166534] hover:to-[#14532d] text-white shadow-md'
               }`}
             >
               {saved ? (
                 <>
-                  <Check className="h-4 w-4" />
+                  <Check className="h-3.5 w-3.5 text-[#0f5a28]" />
                   <span>Saved to Workspace</span>
                 </>
               ) : (
                 <>
-                  <Bookmark className="h-4 w-4" />
-                  <span>Save Compliance Checklist</span>
+                  <Bookmark className="h-3.5 w-3.5" />
+                  <span>Save Compliance Dossier</span>
                 </>
               )}
             </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* D3 Historical Volume Trends */}
+          <TradeVolumeChart
+            commodity={result.commodity}
+            origin={result.origin}
+            destination={result.destination}
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Competent Authorities */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-5 space-y-4">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <Building className="h-4 w-4 text-emerald-400" />
-                <span>Competent Regulatory Authorities to Consult</span>
-              </h3>
-              <div className="space-y-3">
+            <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-3">
+              <div className="flex items-center justify-between border-b border-[#f0ece1] pb-2.5">
+                <div className="flex items-center gap-2">
+                  <Building className="h-4 w-4 text-[#0f5a28]" />
+                  <h3 className="text-xs font-mono font-bold text-[#14100c] uppercase">
+                    Competent Authorities & Registries
+                  </h3>
+                </div>
+                <span className="text-[10px] font-mono text-[#78716c] font-bold">
+                  Primary Feeds
+                </span>
+              </div>
+
+              <div className="space-y-2.5">
                 {result.competentAuthorities.map((auth, idx) => (
                   <div
                     key={idx}
-                    className="rounded-lg bg-slate-950/70 p-3 border border-slate-800 text-xs space-y-1"
+                    className="rounded-2xl bg-[#fbf9f5] p-3.5 border border-[#e2d9cd] text-xs space-y-1.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-white">{auth.name}</span>
-                      <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-400">
+                      <span className="font-bold text-[#14100c] text-xs">{auth.name}</span>
+                      <span className="font-mono text-[10px] text-[#5c5246] bg-white px-2 py-0.5 rounded-md border border-[#e2d9cd] font-bold">
                         {auth.jurisdiction}
                       </span>
                     </div>
-                    <p className="text-slate-300 text-[11px] leading-relaxed">
+                    <p className="text-[#5c5246] text-xs leading-relaxed font-medium">
                       {auth.role}
                     </p>
                     {auth.officialUrl && (
-                      <a
-                        href={auth.officialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] text-emerald-400 hover:underline pt-1"
-                      >
-                        <span>Official Portal</span>
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
+                      <div className="pt-0.5">
+                        <a
+                          href={auth.officialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#0f5a28] hover:text-[#166534]"
+                        >
+                          <span>Official Regulatory Portal</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
                     )}
                   </div>
                 ))}
@@ -321,33 +360,44 @@ export default function TradeDeskView({
             </div>
 
             {/* Phytosanitary & Biosecurity Restrictions */}
-            <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-5 space-y-4">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <ShieldAlert className="h-4 w-4 text-amber-400" />
-                <span>Phytosanitary & Quarantine Biosecurity Rules</span>
-              </h3>
+            <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-3">
+              <div className="flex items-center justify-between border-b border-[#f0ece1] pb-2.5">
+                <div className="flex items-center gap-2">
+                  <ShieldAlert className="h-4 w-4 text-[#d97706]" />
+                  <h3 className="text-xs font-mono font-bold text-[#14100c] uppercase">
+                    Quarantine & Phytosanitary Restrictions
+                  </h3>
+                </div>
+                <span className="text-[10px] font-mono text-[#d97706] font-bold">
+                  Zero Tolerance Pests
+                </span>
+              </div>
+
               <div className="space-y-2">
                 {result.phytosanitaryRules.map((rule, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3 text-xs text-amber-200/90"
+                    className="flex items-start gap-2 rounded-2xl border border-[#fde68a] bg-[#fef3c7]/40 p-3.5 text-xs text-[#78350f]"
                   >
-                    <AlertTriangle className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{rule}</span>
+                    <AlertTriangle className="h-3.5 w-3.5 text-[#d97706] shrink-0 mt-0.5" />
+                    <span className="leading-relaxed font-semibold">{rule}</span>
                   </div>
                 ))}
               </div>
 
               {/* Tariffs and Customs Watchouts */}
-              <div className="pt-2 border-t border-slate-800 space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="pt-2 border-t border-[#f0ece1] space-y-1.5">
+                <span className="text-[10px] font-mono font-bold uppercase text-[#a89f91]">
                   Customs, VAT & Advance Filing Watchouts:
                 </span>
-                <ul className="space-y-1.5 text-xs text-slate-300">
+                <ul className="space-y-1.5 text-xs text-[#5c5246]">
                   {result.tariffsAndCustomsWatchouts.map((watchout, idx) => (
-                    <li key={idx} className="flex items-start gap-2 bg-slate-950/60 p-2 rounded border border-slate-800/80">
-                      <span className="text-emerald-400 font-bold">•</span>
-                      <span>{watchout}</span>
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2 bg-[#fbf9f5] p-3 rounded-2xl border border-[#e2d9cd] font-medium"
+                    >
+                      <span className="text-[#0f5a28] font-bold">•</span>
+                      <span className="leading-relaxed">{watchout}</span>
                     </li>
                   ))}
                 </ul>
@@ -356,41 +406,48 @@ export default function TradeDeskView({
           </div>
 
           {/* Documentation Checklist */}
-          <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-5 space-y-4">
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
-              <FileCheck className="h-4 w-4 text-emerald-400" />
-              <span>Mandatory & Recommended Documentation Checklist</span>
-            </h3>
+          <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-3">
+            <div className="flex items-center justify-between border-b border-[#f0ece1] pb-2.5">
+              <div className="flex items-center gap-2">
+                <FileCheck className="h-4 w-4 text-[#0f5a28]" />
+                <h3 className="text-xs font-mono font-bold text-[#14100c] uppercase">
+                  Mandatory & Recommended Documentation Checklist
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono text-[#78716c] font-semibold">
+                Required Prior to Bill of Lading
+              </span>
+            </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-left text-xs font-sans">
                 <thead>
-                  <tr className="border-b border-slate-800 text-slate-400">
+                  <tr className="border-b border-[#e2d9cd] bg-[#fbf9f5] text-[#5c5246] uppercase text-[10px] font-mono font-bold tracking-wider">
                     <th className="py-2.5 px-3">Document Name</th>
                     <th className="py-2.5 px-3">Issuer Authority</th>
-                    <th className="py-2.5 px-3">Status</th>
-                    <th className="py-2.5 px-3">Operational Requirement</th>
+                    <th className="py-2.5 px-3">Requirement Tier</th>
+                    <th className="py-2.5 px-3">Operational Scope & Inspection Trigger</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60 text-slate-300">
+                <tbody className="divide-y divide-[#f0ece1] text-[#14100c]">
                   {result.documentationChecklist.map((doc, idx) => (
-                    <tr key={idx} className="hover:bg-slate-800/40">
-                      <td className="py-3 px-3 font-semibold text-white">
+                    <tr key={idx} className="hover:bg-[#fcfbf9] transition-colors">
+                      <td className="py-3 px-3 font-bold text-[#14100c]">
                         {doc.documentName}
                       </td>
-                      <td className="py-3 px-3 text-slate-400">{doc.issuer}</td>
-                      <td className="py-3 px-3">
+                      <td className="py-3 px-3 text-[#5c5246] font-mono text-[11px] font-semibold">{doc.issuer}</td>
+                      <td className="py-3 px-3 whitespace-nowrap">
                         <span
-                          className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                          className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded-md ${
                             doc.mandatory
-                              ? 'bg-red-500/10 text-red-400 border border-red-500/20'
-                              : 'bg-slate-800 text-slate-400'
+                              ? 'bg-[#fef2f2] text-[#991b1b] border border-[#fca5a5]'
+                              : 'bg-[#fef3c7] text-[#92400e] border border-[#fde68a]'
                           }`}
                         >
                           {doc.mandatory ? 'Mandatory' : 'Conditional'}
                         </span>
                       </td>
-                      <td className="py-3 px-3 text-slate-300 text-[11px] max-w-md">
+                      <td className="py-3 px-3 text-[#5c5246] text-xs max-w-md leading-relaxed font-medium">
                         {doc.description}
                       </td>
                     </tr>
@@ -402,29 +459,42 @@ export default function TradeDeskView({
 
           {/* Unresolved Questions & Next Steps */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-5 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <HelpCircle className="h-4 w-4 text-slate-400" />
-                <span>Unresolved Legal / Operational Questions</span>
-              </h4>
-              <ul className="space-y-1.5 text-xs text-slate-300">
+            <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-2.5">
+              <div className="flex items-center gap-2 border-b border-[#f0ece1] pb-2">
+                <HelpCircle className="h-4 w-4 text-[#78716c]" />
+                <h4 className="text-xs font-mono font-bold uppercase text-[#14100c]">
+                  Unresolved Legal / Commercial Questions
+                </h4>
+              </div>
+              <ul className="space-y-1.5 text-xs text-[#5c5246]">
                 {result.unresolvedQuestions.map((q, idx) => (
-                  <li key={idx} className="bg-slate-950 p-2.5 rounded border border-slate-800 italic">
+                  <li
+                    key={idx}
+                    className="bg-[#fbf9f5] p-3.5 rounded-2xl border border-[#e2d9cd] italic leading-relaxed text-[#14100c] font-medium"
+                  >
                     &ldquo;{q}&rdquo;
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="rounded-xl border border-slate-800 bg-slate-900/80 p-5 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-                <span>Recommended Practical Next Steps</span>
-              </h4>
-              <ol className="space-y-1.5 text-xs text-slate-200 list-decimal list-inside">
+            <div className="rounded-3xl border border-[#e2d9cd] bg-white p-6 luxury-card-shadow space-y-2.5">
+              <div className="flex items-center gap-2 border-b border-[#f0ece1] pb-2">
+                <CheckCircle2 className="h-4 w-4 text-[#0f5a28]" />
+                <h4 className="text-xs font-mono font-bold uppercase text-[#0f5a28]">
+                  Recommended Practical Next Steps
+                </h4>
+              </div>
+              <ol className="space-y-1.5 text-xs text-[#14100c]">
                 {result.recommendedNextSteps.map((step, idx) => (
-                  <li key={idx} className="bg-slate-950 p-2.5 rounded border border-slate-800">
-                    {step}
+                  <li
+                    key={idx}
+                    className="flex items-start gap-2.5 bg-[#fbf9f5] p-3.5 rounded-2xl border border-[#e2d9cd]"
+                  >
+                    <span className="font-mono text-[#0f5a28] font-bold text-xs shrink-0">
+                      0{idx + 1}.
+                    </span>
+                    <span className="leading-relaxed font-semibold">{step}</span>
                   </li>
                 ))}
               </ol>
